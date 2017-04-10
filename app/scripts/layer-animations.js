@@ -49,9 +49,11 @@ const animateFrontLayers = layer => slide(layer.parentNode.lastElementChild, 480
     }, 150)
   }))
   .then(backwardsLayers => new Promise((resolve) => {
-    layer.classList.add('c-layer--selected')
-    resolve(layer)
     staggeredBackwards(backwardsLayers, layer)
+      .then(backwardsLayers => {
+        resolve(layer)
+        return backwardsLayers
+      })
       .then(backwardsLayers => backwardsLayers.forEach((blayer, index) => {
         setTimeout(() => {
           blayer.classList.remove('c-layer--hide')
@@ -62,6 +64,7 @@ const animateFrontLayers = layer => slide(layer.parentNode.lastElementChild, 480
 const animateNewFrontLayer = layer => {
   const frontHeight = calculateLayerHeight(layer)
   const containerHeight = calculateContainerHeight(layer)
+  layer.classList.add('c-layer--selected')
   return Promise.all([slide(layer, frontHeight, 500, true), slide(layer.parentNode, containerHeight, 500, true)])
 }
 
