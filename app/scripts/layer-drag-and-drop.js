@@ -69,14 +69,16 @@ const pickLabel = event => {
 }
 
 const pickLayer = event => {
-  document.body.classList.add('h-layer--body-grabbing')
-  event.preventDefault()
-  event.stopPropagation()
-  utils.slide(event.currentTarget.parentNode.lastElementChild, 480, 300)
-    .then(layer => {
-      layer.classList.remove('c-layer--selected')
-      layer.classList.add('c-layer--visited')
-    })
+  if (event.target.nodeType === 1 && event.target.classList.contains('c-layer__header__icon-drag')) {
+    document.body.classList.add('h-layer--body-grabbing')
+    event.preventDefault()
+    event.stopPropagation()
+    utils.slide(event.currentTarget.parentNode.lastElementChild, 480, 300)
+      .then(layer => {
+        layer.classList.remove('c-layer--selected')
+        layer.classList.add('c-layer--visited')
+      })
+  }
 }
 
 export default () => {
