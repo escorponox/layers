@@ -32,7 +32,7 @@
   opacity 0.3s cubic-bezier(0.215, 0.61, 0.355, 1),
   background-color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
   &:hover:not(.c-layer--selected) {
-    @media only screen and (max-width: 959px) {
+    @include mq-max($mq-layout-change) {
       border-right-color: $color-selected-border;
     }
     border-top-color: $color-selected-border;
@@ -46,14 +46,14 @@
       width: calc(100% - #{$base-spacing-unit / 2 * ($index - 1)});
     }
 
-    @include mq(960px) {
+    @include mq($mq-layout-change) {
       &:nth-last-of-type(#{$index + 1}):not(.c-layer--selected) {
         transform: scale(1 - 0.1 * $index);
       }
     }
   }
 
-  @include mq(960px) {
+  @include mq($mq-layout-change) {
     border-right-color: transparent;
     margin-left: 0;
     margin-right: 0;
@@ -81,21 +81,21 @@
   opacity: 0;
   transform: scale(0.8) !important;
 
-  @include mq(960px) {
+  @include mq($mq-layout-change) {
     transform: scale(0.8) translate(200px, 200px) !important;
   }
 }
 
-@media only screen and (max-width: 959px) {
-  .evo_c-3dlayer--visited:not(.evo_c-3dlayer--selected):not(.evo_c-3dlayer--hide):not(.evo_c-3dlayer--dragging) {
+@include mq-max($mq-layout-change) {
+  .c-layer--visited:not(.c-layer--selected):not(.c-layer--hide):not(.c-layer--dragging) {
     border-right-color: $color-visited;
 
-    &:hover:not(.evo_c-3dlayer--selected) {
+    &:hover:not(.c-layer--selected) {
       border-right-color: $color-selected-border;
     }
   }
 
-  .evo_c-3dlayer--dragging {
+  .c-layer--dragging {
     border-right-color: $color-selected-border;
   }
 }
@@ -167,7 +167,7 @@
 
 }
 
-.c-layer__header__label {
+.c-layer__title {
   @include font-size(20px, 60px);
   overflow-x: hidden;
   text-overflow: ellipsis;
@@ -178,7 +178,7 @@
   }
 }
 
-.c-layer__header__icon-visited {
+.c-layer__icon-visited {
   display: none;
   flex-shrink: 0;
   margin: 0 $base-spacing-unit;
@@ -188,7 +188,7 @@
   }
 }
 
-.c-layer__header__icon-drag {
+.c-layer__icon-drag {
   cursor: move;
   cursor: grab;
   flex-shrink: 0;

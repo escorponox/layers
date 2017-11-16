@@ -97,20 +97,7 @@ const animateNewFrontLayer = layer => {
   ])
 }
 
-const resizeFrontLayer = event => {
-  const target = event.target
-  if (target.classList.contains('c-layer--selected')) {
-    const frontHeight = calculateLayerHeight(target)
-    const containerHeight = calculateContainerHeight(target)
-    return Promise.all([
-      slide(target, frontHeight, 500, true),
-      slide(target.parentNode, containerHeight, 500, true)
-    ])
-  }
-}
-
 const resizeAllFrontLayers = _.debounce(() => {
-
   const frontLayers = Array.from(
     document.querySelectorAll('.c-layer--selected')
   )
@@ -128,11 +115,13 @@ const moveForward = layer => {
     label.removeEventListener('click', moveForwardListener)
   )
 
-  animateFrontLayers(layer).then(animateNewFrontLayer).then(() => {
-    layers.forEach(label =>
-      label.addEventListener('click', moveForwardListener)
-    )
-  })
+  animateFrontLayers(layer)
+    .then(animateNewFrontLayer)
+    .then(() => {
+      layers.forEach(label =>
+        label.addEventListener('click', moveForwardListener)
+      )
+    })
 }
 
 const moveForwardListener = event => {
@@ -145,9 +134,8 @@ const moveForwardListener = event => {
 export default () => {
   layers.forEach(layer => {
     layer.addEventListener('click', moveForwardListener)
-    layer.addEventListener('resizelayer', resizeFrontLayer)
-    window.addEventListener('resize', resizeAllFrontLayers)
   })
+  window.addEventListener('resize', resizeAllFrontLayers)
   layerContainers.forEach(layerContainer => {
     const selected = layerContainer.querySelector('.c-layer--selected')
     selected.style.height = calculateLayerHeight(selected) + 'px'

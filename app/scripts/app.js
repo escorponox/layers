@@ -1,6 +1,7 @@
 import documentReady from './document-ready'
 import layerAnimations from './layer-animations'
 import layerDragAndDrop from './layer-drag-and-drop'
+import '../styles/app.scss'
 
 documentReady(layerAnimations)
 documentReady(layerDragAndDrop)

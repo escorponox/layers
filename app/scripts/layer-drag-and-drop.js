@@ -1,7 +1,7 @@
 import * as utils from './layer-utils'
 
 const layers = Array.from(document.querySelectorAll('.c-layer'))
-const layerDragIcons = Array.from(document.querySelectorAll('.c-layer__header__icon-drag'))
+const layerDragIcons = Array.from(document.querySelectorAll('.c-layer__icon-drag'))
 
 let draggedLayer = undefined
 
@@ -69,7 +69,7 @@ const pickLabel = event => {
 }
 
 const pickLayer = event => {
-  if (event.target.nodeType === 1 && event.target.classList.contains('c-layer__header__icon-drag')) {
+  if (event.target.nodeType === 1 && event.target.classList.contains('c-layer__icon-drag')) {
     document.body.classList.add('h-layer--body-grabbing')
     event.preventDefault()
     event.stopPropagation()
